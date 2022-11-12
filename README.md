@@ -1,4 +1,35 @@
-# Erebus Attack Simulation
+## How to run?
++ clone this repo and download data
+```
+git clone https://github.com/Erebus-Attack/Bitcoin-Emulator
+cd Bitcoin-Emulator
+wget "https://github.com/erebus-attack/Bitcoin-Emulator/releases/download/v0.1/data.tar.gz"
+tar -zxvf data.tar.gz
+```
+
++ set proxy for pip
+```
+mkdir ~/.pip
+cat > ~/.pip/pip.conf << EOF
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+EOF
+```
++ install dependencies
+```
+apt update
+apt-get install python3-dev python3.8-venv build-essential
+```
++ run it
+```
+python3 -m venv ./venv
+source ./venv/bin/activate
+pip install wheel
+pip install -r requirements.txt
+python main.py
+```
+
+## Erebus Attack Simulation
 The [Erebus Attack](https://erebus-attack.comp.nus.edu.sg/) allows large malicious Internet Service Providers (ISPs) to isolate any targeted public Bitcoin nodes from the Bitcoin peer-to-peer network. Our recent [work](https://www.usenix.org/system/files/sec21fall-tran.pdf) also evaluates a potential defense against this attack.
 
 Here we faithfully implement the connection making behaviour of the Bitcoin protocol in the application space and mount the attack based on data collected from the actual Bitcoin Network. Further, we also deploy the countermeasures stated in the defense paper which can be toggled on or off. The code is broadly paritioned into three components:
@@ -10,7 +41,7 @@ The entire configuration is set in `cfg.py`.
 
 By default, the emulation runs for 381 days and the attack begins at day 30.
 
-## Data prerequisites
+### Data prerequisites
 Our emulation scenario includes an adversary AS (`attacker_as`) mounting the attack against a victim (`victim_as`). The victim AS denotes the AS network that the target victim node is connected to.
 
 A sample data package is provided [here](https://github.com/erebus-attack/Bitcoin-Emulator/releases/download/v0.1/data.tar.gz). The attacker is considered to be the L3 AS and the victim is considered to be a node in the Amazon AS.
@@ -31,11 +62,11 @@ Second, ensure that the `data` directory is extracted and placed in the project 
 
 We use the python virtual environment to manage dependencies.
 ```sh
-# create venv
+## create venv
 $ python3 -m venv ./venv
-# activate it
+## activate it
 $ source ./venv/bin/activate
-# install dependencies
+## install dependencies
 (venv) $ pip install -r requirements.txt
 ```
 
@@ -56,5 +87,5 @@ The result of the simulation is printed to the console in the end.
 
 The code has been tested on Ubuntu 16.04 and 18.04, with Python 3.8.
 
-## Support
+### Support
 Feel free to raise questions in the Issues section.
