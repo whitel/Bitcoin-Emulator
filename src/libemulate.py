@@ -181,10 +181,13 @@ def run(addrman):
     # start emulation: tick from start to end
     print("Starting emulation..")
     print("day shadow_cnt outbound_cnt")
+    f = open("reduce-tried-size", "w")
     for nNow in range(EMU_PARAMS.nStart, EMU_PARAMS.nEnd):
         # check success rate every day 
         if nNow >= EMU_PARAMS.nStart + check_next_success_rate * 24 * 60 * 60:
-            print(check_next_success_rate, EMU_VARS.shadow_outbound_peer_cnt, len(EMU_VARS.currentOutboundPeers))
+            result_str = str(check_next_success_rate) + " " + str(EMU_VARS.shadow_outbound_peer_cnt) + " " + str(len(EMU_VARS.currentOutboundPeers))
+            print(result_str)
+            f.write(result_str + "\n")
             if nNow >= EMU_PARAMS.nAttackStart:
                 # trigger reboot if necessary
                 check_success_rate(nNow, addrman)
@@ -263,6 +266,8 @@ def run(addrman):
                 break
 
     em_end = time.time()
+
+    f.close()
 
     save(nNow, em_start, em_end)
 
