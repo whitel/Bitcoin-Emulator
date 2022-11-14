@@ -82,7 +82,7 @@ class EmulationParam:
     is_adaptive = True
 
     # should the RAP defense be deployed
-    rap_enabled = True
+    rap_enabled = False
 
     # threshold tau describes the maximum number of peer connections that can share the same AS
     # (see section 4.2 of the paper)
