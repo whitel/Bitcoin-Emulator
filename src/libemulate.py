@@ -6,6 +6,8 @@ import time
 from cfg import Config
 from . import get_config
 
+from asguard.asguard import ASGuard
+
 COUNTERMEASURES, ADDRMAN_PARAMS, EMU_PARAMS, EMU_VARS = get_config()
 
 def search_prefix_list(ip, prefix_list):
