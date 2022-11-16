@@ -28,10 +28,10 @@ class ASGuard:
 
         list = self.GetTracerouteResult(target)
         for item in list:
-            if(backup.has_key(item) == False):
-                backup[item] = 1
-            else:
+            if(item in backup):
                 backup[item] += 1
+            else:
+                backup[item] = 1
 
         # n为待测阈值，暂定为10
         n = 10
