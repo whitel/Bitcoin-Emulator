@@ -6,6 +6,7 @@ class ASGuard:
         # self.debug = "DEBUG"
         self.executable = './asguard/asroute.sh'
         self.as_counter = dict()
+        self.as_list = dict()
 
     # 使用traceroute + as whois进行路径测试（todo：使用CAIDA的数据，或者更好的方法）
     def GetTracerouteResult(self, target):
@@ -14,16 +15,8 @@ class ASGuard:
         output = process.communicate()[0].decode("utf-8")
         return output.replace("\n", "").split(" ")
 
-    def Add(self, asn):
-        pass
-
-
-    def Delete(self, asn):
-        pass
-
-
     # 测试目标IP是否会触发EREBUS攻击预警。如果可以安全加入则返回True，否则返回False
-    def Banker(self, target):
+    def Add(self, target):
         backup = dict(self.as_counter)
 
         list = self.GetTracerouteResult(target)
@@ -40,4 +33,14 @@ class ASGuard:
                 return False
 
         self.as_counter = dict(backup)
+        self.as_list[target] = list
         return True
+
+
+    def Delete(self, target):
+        for item in self.as_counter:
+            if(item in self.as_list[target]):
+                self.as_counter[item] -= 1
+                if(self.as_counter[item] == 0):
+                    del self.as_counter[item]
+        del self.as_list[target]
