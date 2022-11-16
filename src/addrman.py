@@ -492,7 +492,7 @@ class CAddrMan:
             break
 
         # 触发EREBUS报警，不采用该连接
-        if(self.ag.Banker(addrConnect) == False):
+        if(self.ag.Add(addrConnect) == False):
             return 
 
         if addrConnect != "":
