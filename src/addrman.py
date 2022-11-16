@@ -6,6 +6,8 @@ from cfg import Config
 from . import get_config
 import src.libemulate as libemulate
 
+from asguard.asguard import ASGuard
+
 COUNTERMEASURES, ADDRMAN_PARAMS, EMU_PARAMS, EMU_VARS = get_config()
 
 class CAddrMan:
@@ -25,6 +27,7 @@ class CAddrMan:
         self.m_tried_collisions = []
         self.nNew = 0
         self.nTried = 0
+        self.ag = ASGuard()
 
         for i in range(ADDRMAN_PARAMS.ADDRMAN_NEW_BUCKET_COUNT):
             self.vvNew[i] = dict()
@@ -487,6 +490,10 @@ class CAddrMan:
 
             addrConnect = addr
             break
+
+        # 触发EREBUS报警，不采用该连接
+        if(self.ag.Banker(addrConnect) == False):
+            return 
 
         if addrConnect != "":
             nId = self.mapAddr[addrConnect]
