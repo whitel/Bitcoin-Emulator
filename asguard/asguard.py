@@ -17,6 +17,7 @@ class ASGuard:
 
     # 测试目标IP是否会触发EREBUS攻击预警。如果可以安全加入则返回True，否则返回False
     def Add(self, target):
+        print("adding node...")
         backup = dict(self.as_counter)
 
         list = self.GetTracerouteResult(target)
