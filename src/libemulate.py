@@ -202,7 +202,7 @@ def run(addrman):
                     if is_shadow and nNow > EMU_PARAMS.nAttackStart:
                         EMU_VARS.shadow_outbound_peer_cnt -= 1
                     EMU_VARS.currentOutboundPeers.remove(outbound_peer)
-                    addrman.ag.Delete(outbound_peer)
+                    # addrman.ag.Delete(outbound_peer)
 
 
         # prepare legitimate addresses to broadcast (i.e. addresses that are broadcast from 

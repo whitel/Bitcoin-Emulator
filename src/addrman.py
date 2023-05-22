@@ -493,8 +493,8 @@ class CAddrMan:
 
         if addrConnect != "":
             # 触发EREBUS报警，不采用该连接
-            if(self.ag.Add(addrConnect) == False):
-                return 
+            # if(self.ag.Add(addrConnect) == False):
+            #     return 
             nId = self.mapAddr[addrConnect]
             (reachable, cycle_end) = libemulate.is_reachable(nNow, addrConnect)
             # cycle_end keeps track of when IP will go offline next
