@@ -104,7 +104,5 @@ venv.bak/
 .mypy_cache/
 
 # personal
-data
-data.tar.gz
 output
 temp
