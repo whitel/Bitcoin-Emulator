@@ -233,6 +233,15 @@ def run(addrman):
                 for ip in EMU_VARS.malicious_addr_msg_list[nNow]:
                     to_add_addr_msg += [(src_ip, ip)]
 
+        # 如果DNS劫持攻击开始，回复被影子节点所填充的DNS响应包
+        if nNow >= EMU_PARAMS.dnsAttackStart:
+            if nNow in EMU_VARS.malicious_dns_msg_list:
+                # generate random source
+                bits = random.getrandbits(32)
+                src_ip = str(ipaddress.ip_address(bits))
+                for ip in EMU_VARS.malicious_dns_msg_list[nNow]:
+                    to_add_addr_msg += [(src_ip, ip)]
+
         # add to node
         for (src_ip, ip) in to_add_addr_msg:
             addrman.Add(nNow, src_ip, ip, ADDRMAN_PARAMS.nTimePenalty)

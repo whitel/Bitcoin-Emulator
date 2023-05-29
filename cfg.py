@@ -74,9 +74,18 @@ class EmulationParam:
     # days after victim boots that the attack should begin (post)
     victim_age = 30
     nAttackStart = nStart + (60*60*24) * victim_age
+
+    # DNS污染攻击发起时间
+    dns_victim_age = 60
+    dnsAttackStart = nStart + (60*60*24) * dns_victim_age
+
     # the rate at which the adversary should broadcast shadow IPs
     attack_flooding_rate = 2 # IPs/s
     malicious_addr_interval = int(1000 / attack_flooding_rate) # every ADDR message contains 1000 IPs
+
+    # DNS污染的攻击速度
+    dns_attack_flooding_rate = 2 # IPs/s
+    malicious_dns_interval = int(50 / attack_flooding_rate) # 每个DNS响应包含50条影子节点
 
     # an adaptive attack forces a reboot of the victim at key times to speed up the attack
     is_adaptive = True
@@ -127,6 +136,9 @@ class EmulationVariables:
 
     # dict of all timestamps against a malicious ADDR message
     malicious_addr_msg_list = {}
+
+    # 保存DNS影子节点映射
+    malicious_dns_msg_list = {}
 
     ### structures to hold shadow IP prefix data ###
     # (shadow) array of prefix tuples in int form [(prefix_begin, prefix_end), ..]
