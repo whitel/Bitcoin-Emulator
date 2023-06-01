@@ -30,6 +30,9 @@ if __name__ == "__main__":
     prepare.prepare_addr_broadcasts()
     prepare.prepare_malicious_addr_broadcasts_shadow()
 
+    # 准备DNS攻击所使用的影子节点
+    prepare.prepare_malicious_dns_shadow()
+
     if cfg.Config.EmulationParam.rap_enabled:
         prepare.prepare_malicious_addr_broadcasts_hidden_shadow()
 

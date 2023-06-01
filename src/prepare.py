@@ -329,6 +329,22 @@ def prepare_malicious_addr_broadcasts_shadow():
         EMU_VARS.malicious_addr_msg_list[ts] = ip_list
 
 @log_func
+def prepare_malicious_dns_shadow():
+    # 创建一个月的量的DNS恶意响应信息，之后每个月都可以循环使用这个数据
+    malicious_dns_msg_cnt_monthly = int(60 * 60 * 24 * 30 / EMU_PARAMS.malicious_dns_interval)
+
+    # create dict to broadcast malicious IPs at appropriate time intervals
+    for i in range(malicious_dns_msg_cnt_monthly):
+        ts = EMU_PARAMS.dnsAttackStart + i * EMU_PARAMS.malicious_dns_interval
+
+        ip_list = []
+        for j in range(50):
+            ip, _, _ = get_random_ip(EMU_VARS.group_prefixes_dict_shadow, EMU_VARS.group_prefix_index_dict_shadow, EMU_VARS.groups_list_shadow)
+            ip_list += [ip]
+
+        EMU_VARS.malicious_dns_msg_list[ts] = ip_list
+
+@log_func
 def prepare_malicious_addr_broadcasts_hidden_shadow():
     # we only need to create malicious addr for 1 month, then we can replay it every month
     malicious_addr_msg_cnt_monthly = int(60 * 60 * 24 * 30 / EMU_PARAMS.malicious_addr_interval)
