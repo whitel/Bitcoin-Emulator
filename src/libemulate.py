@@ -225,7 +225,7 @@ def run(addrman):
                         to_add_addr_msg += [(src_ip.split(":")[0], ip)]
 
         # broadcast malicious addresses if it is time
-        if nNow >= EMU_PARAMS.nAttackStart:
+        if EMU_PARAMS.erebus_attack_enabled == True and nNow >= EMU_PARAMS.nAttackStart:
             if nNow in EMU_VARS.malicious_addr_msg_list:
                 # generate random source
                 bits = random.getrandbits(32)
@@ -234,7 +234,7 @@ def run(addrman):
                     to_add_addr_msg += [(src_ip, ip)]
 
         # 如果DNS劫持攻击开始，回复被影子节点所填充的DNS响应包
-        if nNow >= EMU_PARAMS.dnsAttackStart:
+        if EMU_PARAMS.dns_attack_enabled == True and nNow >= EMU_PARAMS.dnsAttackStart:
             if nNow in EMU_VARS.malicious_dns_msg_list:
                 # generate random source
                 bits = random.getrandbits(32)

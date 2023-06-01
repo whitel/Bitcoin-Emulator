@@ -66,6 +66,9 @@ class EmulationParam:
     # name of the victim AS
     victim_as = "amzn"
 
+    dns_attack_enabled = True
+    erebus_attack_enabled = True
+
     # timestamp at which the emulation should begin
     nStart = 1542562302
     # timestamp at which the emulation should end
@@ -76,7 +79,7 @@ class EmulationParam:
     nAttackStart = nStart + (60*60*24) * victim_age
 
     # DNS污染攻击发起时间
-    dns_victim_age = 60
+    dns_victim_age = 30
     dnsAttackStart = nStart + (60*60*24) * dns_victim_age
 
     # the rate at which the adversary should broadcast shadow IPs
